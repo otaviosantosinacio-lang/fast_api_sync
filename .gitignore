@@ -8,6 +8,12 @@ __pycache__/
 # C extensions
 *.so
 
+#txt
+anotações.txt
+
+#database
+database.db
+
 # Distribution / packaging
 .Python
 build/
