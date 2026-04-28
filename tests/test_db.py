@@ -1,24 +1,22 @@
-from sqlalchemy import create_engine, select
-from sqlalchemy.orm import Session
+from sqlalchemy import select
 
-from src.fast_api.models import User, table_registry
+from src.fast_api.models import User
 
 
-def test_creat_user():
-  
+def test_creat_user(session):
 
-    
-    with Session(engine) as session:
-        user = User(
-            username='OtavioTest',
-            email='otaviotest@otavio.com',
-            password='senhaotaviotest',
-        )
+    user = User(
+        username='OtavioTest',
+        email='otaviotest@otavio.com',
+        password='senhaotaviotest',
+    )
 
-        session.add(user)
-        session.commit()
-        
-        result = session.scalar(select(User).where(User.email == 'otaviotest@otavio.com'))
+    session.add(user)
+    session.commit()
+
+    result = session.scalar(
+        select(User).where(User.email == 'otaviotest@otavio.com')
+    )
     assert result.username == 'OtavioTest'
     assert result.email == 'otaviotest@otavio.com'
     assert result.password == 'senhaotaviotest'
